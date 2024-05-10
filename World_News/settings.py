@@ -16,11 +16,11 @@ import dj_database_url
 if os.path.isfile('env.py'):
    import env
 
-SECRET_KEY = os.environ.get('SECRET_KEY')
+SECRET_KEY = os.environ.get('SECRET_KEY', 'templates')
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
+TEMPLATE_DIR = os.path.join(BASE_DIR)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
@@ -31,7 +31,7 @@ SECRET_KEY = 'django-insecure-h%ad#g@0&zi*$u0u)_9tbak809d5d84xdzi=r&_3zwq+9y-f%p
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['8000-limazurmati-newsbacklog-mw7wdemr2eb.ws-us110.gitpod.io']
+ALLOWED_HOSTS = ['world-news.herokuapp.com', 'localhost']
 
 
 # Application definition
@@ -63,7 +63,7 @@ ROOT_URLCONF = 'World_News.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [TEMPLATE_DIR],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -131,7 +131,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES = 'loudinary_storage'
+STATICFILES_STORAGE = 'cloudinary_storage.storage.StaticHashedCloudinaryStorage'
+STATICFILES_DIR = [os.path.join(BASE_DIR,'static')]
+STATIC_ROOT = [os.path.join(BASE_DIR,'staticfiles')]
+
+MEDIA_URL = '/media/'
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 
 # Default primary key field type
