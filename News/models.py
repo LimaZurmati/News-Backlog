@@ -30,7 +30,7 @@ class News(models.Model):
 
 
 class Comment(models.Model):
-    post = models.ForeignKey(Post, on_delete=models.CASCADE,
+    post = models.ForeignKey(News, on_delete=models.CASCADE,
                              related_name="comments")
     user_name = models.CharField(max_length=80)
     user_email = models.EmailField()
