@@ -25,7 +25,7 @@
                                     <p class="author">Author: {{ news.news_author }}</p>
                                 </div>
                             </div>
-                            <a href="#" class="post-link">
+                            <a href="{% url 'news_detail' news.slug  %}" class="post-link">
                                 <h2 class="card-title">{{ news.news_title }}</h2>
                                 <p class="card-text">{{ news.news_excerpt }}</p>
                             </a>

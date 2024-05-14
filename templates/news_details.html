@@ -6,11 +6,11 @@
             <div class="col-md-6 masthead-text">
                 <!-- News title and details -->
                 <h1 class="post-title">{{ post.news_title }}</h1>
-
+               
                 <p class="post-subtitle">{{ post.news_author }} | {{ post.created_on }}</p>
             </div>
             <div class="d-none d-md-block col-md-6 masthead-image">
-
+                
                 {% if "placeholder" in post.news_image.url %}
                 <img src="https://codeinstitute.s3.amazonaws.com/fullstack/blog/default.jpg" width="100%">
                 {% else %}
@@ -25,22 +25,22 @@
     <div class="row">
         <div class="col card mb-4  mt-3 left  top">
             <div class="card-body">
-                <!-- News Content -->
+<!-- News Content -->
                 <p class="card-text ">
                     {{ post.news_content | safe }}
                 </p>
 
-                <!-- Likes and comments -->
+                 <!-- Likes and comments -->
                 <div class="row">
 
                     <div class="col-1">
-
+                        
                         <strong class="text-secondary"><i class="far fa-heart"></i> {{ post.number_of_likes }} </strong>
                     </div>
                     <div class="col-1">
                         {% with comments.count as total_comments %}
                         <strong class="text-secondary"><i class="far fa-comments"></i>
-
+                            
                             {{ total_comments }}</strong>
                         {% endwith %}
                     </div>
@@ -54,32 +54,32 @@
         </div>
     </div>
 
-    <!-- Comments -->
+           <!-- Comments -->
     <div class="row">
         <div class="col-md-8 card mb-4  mt-3 ">
             <h3>Comments:</h3>
             <div class="card-body">
-
+              
                 {% for comment in comments %}
                 <div class="comments" style="padding: 10px;">
                     <p class="font-weight-bold">
-
+                       
                         {{ comment.user_name }}
                         <span class=" text-muted font-weight-normal">
-
+                          
                             {{ comment.created_on }}
                         </span> wrote:
                     </p>
-
+                    
                     {{ comment.Comment_content | linebreaks }}
                 </div>
-
+               
                 {% endfor %}
             </div>
         </div>
         <div class="col-md-4 card mb-4  mt-3 ">
             <div class="card-body">
-
+               
             </div>
         </div>
     </div>

@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block content %}
+{% load static %}
+
+<!-- Site Header -->
+<header>
+  <div class="text-center mt-3">
+    {% now "l, j F Y" %}
+  </div>
+</header>
+
+<div class="container-fluid mt-4">
+  <div class="row">
+    <div class="col-12 mt-3">
+      <div class="row">
+        <!-- Card's code from Bootstrap  -->
+        {% for news in news_list %}
+        <div class="col-auto mb-3">
+          <!-- <div class="post-container"> -->
+          <div class="card">
+            <a href="{% url 'article' article.slug  %}" class="news-link">
+
+                {% if "placeholder" in news.news_image.url %}
+              <img class="card-img-top" src="{% static 'image/newsImage.jpg' %}" alt="News Image">
+              {% else %}
+              <img class="card-img-top" src=" {{ article.news_image.url }}" alt="News Image">
+              {% endif %}
+              <div class="card-body mt-3">
+                <h5 class="card-title">{{ news.news_title }}</h5>
+                <p class="card-text">{{ {{ news.news_excerpt }} | safe}}</p>
+              </div>
+            </a>
+
+            <hr>
+            <p class="card-text text-muted h6">{{ news.created_on}} <i class="far fa-heart"></i>
+                {{ news.number_of_likes }}</p>
+            <p class="date text-muted">{{ news.created_on}}</p>
+          </div>
+        </div>
+        {% if forloop.counter|divisibleby:3 %}
+      </div>
+      <div class="row">
+        {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+  <!-- Site Pagination -->
+  {% if is_paginated %}
+  <div class="d-flex justify-content-center">
+    <ul class="pagination">
+      {% if page_obj.has_previous %}
+      <li class="page-item"><a href="?page={{ page_obj.previous_page_number }}" class="page-link">&laquo; Previous</a>
+      </li>
+      {% endif %}
+      {% if page_obj.has_next %}
+      <li class="page-item"><a href="?page={{ page_obj.next_page_number }}" class="page-link">Next &raquo;</a></li>
+      {% endif %}
+    </ul>
+  </div>
+  {% endif %}
+</div>
+{%endblock%}
