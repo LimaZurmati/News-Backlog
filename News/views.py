@@ -12,7 +12,7 @@ class NewsList(generic.ListView):
     paginate_by = 6
 
 
-class PostDetail(View):
+class NewsDetail(View):
 
     def get(self, request, slug, *args, **kwargs):
         queryset = News.objects.filter(released_status=1)
@@ -24,7 +24,7 @@ class PostDetail(View):
 
         return render(
             request,
-            "post_detail.html",
+            "news_details.html",
             {
                 "post": post,
                 "comments": comments,
