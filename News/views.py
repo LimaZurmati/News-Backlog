@@ -63,5 +63,14 @@ class NewsDetail(View):
                 "comment_form": CommentForm()
             },
         )        
+class NewsLike(View):
+    
+    def post(self, request, slug, *args, **kwargs):
+        post = get_object_or_404(Post, slug=slug)
+        if post.likes.filter(id=request.user.id).exists():
+            post.likes.remove(request.user)
+        else:
+            post.likes.add(request.user)
 
+        return HttpResponseRedirect(reverse('news_detail', args=[slug]))
         
