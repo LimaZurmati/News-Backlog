@@ -1,5 +1,6 @@
 {% extends 'base.html' %} {% block content %}
 {% load crispy_forms_tags %}
+{% load static %}
 
 <div class="masthead">
     <div class="container">
@@ -13,7 +14,7 @@
             <div class="d-none d-md-block col-md-6 masthead-image">
                 
                 {% if "placeholder" in post.news_image.url %}
-                <img src="https://codeinstitute.s3.amazonaws.com/fullstack/blog/default.jpg" width="100%">
+                <img src="{% static 'image/kabul.jpg' %}" width="100%">
                 {% else %}
                 <img src=" {{ post.news_image.url }}" width="100%">
                 {% endif %}

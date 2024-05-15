@@ -1,0 +1,20 @@
+
+{% extends "base.html" %}
+{% block content %}
+{% load static %}
+
+<h3 class=" mt-5 text-center">Add News</h3>
+<br>
+<div class="container">
+    <div class="col-lg-8 mt-3 mx-auto">
+        <div class="form-group">
+            <form method="POST"  enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.media}}
+                {{ form.as_p}}
+                <button class="btn btn-secondary" type="submit">Add News</button>
+            </form>
+        </div>
+    </div>
+</div>
+{%endblock%}
