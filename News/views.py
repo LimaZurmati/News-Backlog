@@ -86,7 +86,7 @@ def comment_edit(request, slug, comment_id):
         comment = get_object_or_404(Comment, pk=comment_id)
         comment_form = CommentForm(data=request.POST, instance=comment)
 
-        if comment_form.is_valid() and comment.news_author == request.news_user:
+        if comment_form.is_valid() and comment.news_author == request.user_name:
             comment = comment_form.save(commit=False)
             comment.post = post
             comment.approved = False
@@ -96,3 +96,20 @@ def comment_edit(request, slug, comment_id):
             messages.add_message(request, messages.ERROR, 'Error updating comment!')
 
     return HttpResponseRedirect(reverse('news_detail', args=[slug]))
+
+
+def comment_delete(request, slug, comment_id):
+    """
+    view to delete comment
+    """
+    queryset = Post.objects.filter(released_status=1)
+    post = get_object_or_404(queryset, slug=slug)
+    comment = get_object_or_404(Comment, pk=comment_id)
+
+    if comment.author == request.user:
+        comment.delete()
+        messages.add_message(request, messages.SUCCESS, 'Comment deleted!')
+    else:
+        messages.add_message(request, messages.ERROR, 'You can only delete your own comments!')
+
+    return HttpResponseRedirect(reverse('news_detail', args=[slug]))    
