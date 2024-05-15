@@ -101,7 +101,10 @@
             {% if commented %}
             <div class="alert alert-success" role="alert">
                 Your comment is awaiting approval
+                <button class="btn btn-edit"
+                comment_id="{{ comment.id }}">Edit</button>
             </div>
+
             {% else %}
             {% if user.is_authenticated %}
 
